@@ -6,15 +6,23 @@ import { BufferAttribute } from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 const Ground = () => {
+  const [ref] = usePlane(
+    () => ({
+      type: "Static",
+      rotation: [-Math.PI / 2, 0, 0],
+    }),
+    useRef(null)
+  );
+
   const gridMap = useLoader(
     TextureLoader,
     process.env.PUBLIC_URL + "/textures/grid.png"
   );
 
-  const aoMap = useLoader(
-    TextureLoader,
-    process.env.PUBLIC_URL + "/textures/ground-ao.png"
-  );
+  //   const aoMap = useLoader(
+  //     TextureLoader,
+  //     process.env.PUBLIC_URL + "/textures/ground-ao.png"
+  //   );
 
   const alphaMap = useLoader(
     TextureLoader,
@@ -49,13 +57,13 @@ const Ground = () => {
       >
         <circleGeometry args={[6.12, 50]} />
         <MeshReflectorMaterial
-          aoMap={aoMap}
+          //   aoMap={aoMap}
           alphaMap={alphaMap}
           transparent={true}
           color={[0.5, 0.5, 0.5]}
           envMapIntensity={0.35}
           metalness={0.05}
-          roughness={0.4}
+          //   roughness={0.4}
           dithering={true}
           blur={[1024, 512]} // Blur ground reflections (width, heigt), 0 skips blur
           mixBlur={3} // How much blur mixes with surface roughness (default = 1)
